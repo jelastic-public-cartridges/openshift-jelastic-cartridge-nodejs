@@ -51,7 +51,7 @@ function start() {
 
 
   if [ -f "${OPENSHIFT_REPO_DIR}/ROOT/package.json" ]; then
-      npm install;
+      npm install 2>&1;
       supervisor_opts="$(get_main_script_from_package_json)"
       node_cmd="npm start -d"
   else
@@ -178,7 +178,7 @@ function build() {
     mkdir -p $node_modules_dir
 
     if force_clean_build_enabled_for_latest_deployment; then
-        echo "Force-clean builds are enabled. Recreating npm modules" 1>&2
+        echo "Force-clean builds are enabled. Recreating npm modules"
 
         # Remove saved modules, if any.
         rm -rf $saved_modules_dir
