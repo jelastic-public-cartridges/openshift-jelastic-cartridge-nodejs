@@ -212,9 +212,9 @@ function build() {
             echo "Checking npm module: $m"
             echo
             if is_node_module_installed "$m"; then
-                (cd "${OPENSHIFT_NODEJS_DIR}"; nodejs_context "npm update '$m'")
+                (cd "${OPENSHIFT_NODEJS_DIR}"; nodejs_context "npm update '$m' 2>&1")
             else
-                (cd "${OPENSHIFT_NODEJS_DIR}"; nodejs_context "npm install '$m'")
+                (cd "${OPENSHIFT_NODEJS_DIR}"; nodejs_context "npm install '$m' 2>&1")
             fi
         done
     fi
@@ -228,7 +228,7 @@ function build() {
 
    # nodejs_context /bin/bash
     if [ -f "${OPENSHIFT_REPO_DIR}"/ROOT/package.json ]; then
-        (cd "${OPENSHIFT_REPO_DIR}/ROOT"; nodejs_context "npm install -d")
+        (cd "${OPENSHIFT_REPO_DIR}/ROOT"; nodejs_context "npm install -d 2>&1")
     fi
 }
 
