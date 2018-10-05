@@ -163,7 +163,7 @@ function stop() {
 function restart() {
     stop
     start
-}
+} >> $OPENSHIFT_NODEJS_LOG_DIR/node.log
 
 function force_clean_build_enabled_for_latest_deployment(){
     return 0
@@ -230,9 +230,7 @@ function build() {
     if [ -f "${OPENSHIFT_REPO_DIR}"/ROOT/package.json ]; then
         (cd "${OPENSHIFT_REPO_DIR}/ROOT"; nodejs_context "npm install -d 2>&1")
     fi
-}
-
-
+} >> $OPENSHIFT_NODEJS_LOG_DIR/build.log
 
 function post-deploy() {
     if hot_deploy_enabled_for_latest_deployment; then
